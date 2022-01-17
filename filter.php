@@ -34,7 +34,6 @@ if (isset($_POST['certificate_form'])) {
 
     header('content-type:application/pdf');
     $image = @imagecreatefromjpeg("./template.jpg");
-    $output = "certificate.jpg";
     $black = imagecolorallocate($image, 0, 0, 0);
 
     $rotation = 0;
@@ -52,6 +51,7 @@ if (isset($_POST['certificate_form'])) {
     $origin_x = abs($image_width - $txt_width) / 2;
     $origin_y = 790;
 
+    $output = $name . ".jpeg";
     imagettftext($image, $font_size, $rotation, $origin_x, $origin_y, $black, $drFont, $certificate_text);
     imagejpeg($image, $output, 100);
     imagedestroy($image);
@@ -60,5 +60,9 @@ if (isset($_POST['certificate_form'])) {
     $pdf->AddPage('L', 'A4');
     $pdf->Image($output, 0, 0, 300, 210);
     $pdf->Output('D', 'certificate.pdf');
+
+    if (is_file($output)) {
+      unlink($output);
+    }
   }
 }
