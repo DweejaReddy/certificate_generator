@@ -46,10 +46,9 @@ const generatePDF = async (name) => {
   firstPage.drawText(name, {
     x: 270,
     y: 320,
-    size: 50,
+    size: 45,
     font: SanChezFont,
-    textAlign:"center",
-    color: rgb(0,0,0),
+    color: rgb(0, 0, 0),
   });
 
   // Serialize the PDFDocument to bytes (a Uint8Array)
@@ -63,7 +62,7 @@ const generatePDF = async (name) => {
 
   var file = new File(
     [pdfBytes],
-    "NEO_certificate.pdf",
+    "NEO_Certificate.pdf",
     {
       type: "application/pdf;charset=utf-8",
     }
